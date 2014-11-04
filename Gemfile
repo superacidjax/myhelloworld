@@ -5,7 +5,7 @@ ruby '2.1.2'
 gem 'rails', '4.2.0.beta2'
 gem 'puma'
 
-gem 'sqlite3'
+gem 'pg'
 
 gem 'decent_exposure'
 gem 'bourbon'

@@ -16,4 +16,11 @@ feature 'User views courses' do
     expect(page).to have_content course.name
     expect(page).to have_content second_course.name
   end
+
+  scenario 'User views course details' do
+    visit courses_path
+    click_link course.id
+    expect(page).to have_content course.name
+    expect(page).to have_content course.price
+  end
 end

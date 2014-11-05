@@ -23,4 +23,20 @@ feature 'User views courses' do
     expect(page).to have_content course.name
     expect(page).to have_content course.price
   end
+
+  scenario 'User successfully signs up' do
+    visit course_path(course)
+    click_link 'Get Started Now'
+    fill_in 'Name', with: 'Brian Dear'
+    fill_in 'Email', with: 'brian@example.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Create Account'
+    expect(page).to have_content 'Payment'
+    fill_in 'Credit Card', with: '4242424242424242'
+    fill_in 'Expiration Month', with: '2'
+    fill_in 'Expiration Year', with: '2019'
+    fill_in 'CVV', with: '747'
+    click_link 'Pay Now'
+    expect(page).to have_content "Welcome to #{course.name}!"
+  end
 end

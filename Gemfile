@@ -7,6 +7,8 @@ gem 'puma'
 
 gem 'pg'
 
+gem 'sorcery'
+
 gem 'decent_exposure'
 gem 'bourbon'
 gem 'neat'

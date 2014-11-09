@@ -1,0 +1,8 @@
+.sign-up
+  %h2= t('.title')
+  = form_for user do |f|
+    = render partial: 'form', locals: { f: f }
+    .submit-field
+      = f.submit 'Create Account'
+    .other-links
+      = link_to t('.sign_in'), sign_in_path

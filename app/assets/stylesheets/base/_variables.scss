@@ -1,6 +1,6 @@
 // Typography
-$sans-serif: $helvetica;
-$serif: $georgia;
+$sans-serif: 'Lato';
+$serif: 'Merriweather';
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
 
@@ -35,7 +35,7 @@ $light-green: #E6EFC2;
 $base-background-color: white;
 
 // Font Colors
-$base-font-color: $dark-gray;
+$base-font-color: #3f3d32;
 $base-accent-color: $blue;
 
 // Link Colors

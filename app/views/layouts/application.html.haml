@@ -1,18 +1,14 @@
 !!!
 %html
   %head
-    %title My Hello World | Programming for TOTAL beginners
+    %title Everybody Code!
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = yield :head
   %body
     .wrapper-for-content-outside-of-footer
-      / = render 'layouts/header'
-      - if logged_in?
-        Signed in as #{current_user.email}
-        = button_to t('.sign_out'), sign_out_path, method: :delete
-      - else
-        = link_to t('.sign_in'), sign_in_path
+      = render 'layouts/header'
       - flash.each do | key, value|
         = content_tag(:div, value, class: "alert alert-#{key}")
       .outer-wrapper

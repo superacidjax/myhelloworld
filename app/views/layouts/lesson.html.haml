@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %title Everybody Code!
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = yield :head
+  %body
+    .wrapper-for-content-outside-of-footer
+      = render 'layouts/lesson_header'
+      - flash.each do | key, value|
+        = content_tag(:div, value, class: "alert alert-#{key}")
+      .outer-wrapper
+        = yield
+    / = render 'layouts/footer'

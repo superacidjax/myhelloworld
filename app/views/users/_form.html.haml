@@ -1,9 +1,19 @@
-.text-field
-  = f.label :email
-  = f.email_field :email
-.password-field
-  = f.label :password
-  = f.password_field :password
-.password-field
-  = f.label :password_confirmation
-  = f.password_field :password_confirmation
+= user.errors.full_messages.first if user.errors.any?
+.sign-up
+  = form_for user do |f|
+    .text-field
+      = f.label :display_name
+      = f.text_field :display_name
+    .text-field
+      = f.label :email
+      = f.email_field :email
+    .password-field
+      = f.label :password
+      = f.password_field :password
+    .password-field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+    .submit-field
+      = f.submit 'Continue'
+    / .other-links
+    /   = link_to t('.sign_in'), sign_in_path

@@ -1,3 +1,24 @@
-%h2
-  = course.name
-= link_to 'See Course', course, id: course.id
+.card
+  - cache course do
+    - if course.new?
+      .ribbon-wrapper
+        .ribbon NEW
+    .card-image
+      %img{:alt => "", :src => 'https://i.vimeocdn.com/video/491672516_295x166.jpg'}
+    .card-header
+      = link_to course.name, course_path(course)
+      / = link_to 'Edit', edit_course_lesson_path(course, lesson)
+    .card-copy
+      %p
+        #{course.description.truncate(300)} #{link_to 'Read more', course}
+    .card-stats
+      %ul
+        %li
+          = course.lessons.count
+          %span Lessons
+        %li
+          = course.level
+          %span Experience
+        %li
+          = course.programming_language
+          %span Language

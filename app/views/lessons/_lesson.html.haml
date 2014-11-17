@@ -1,0 +1,77 @@
+- if user_has_access?
+  - cache lesson do
+    .card
+      .card-image
+        %img{:alt => "", :src => lesson.thumbnail_url}
+      .card-header
+        = link_to lesson.name, course_lesson_path(course, lesson)
+        / = link_to 'Edit', edit_course_lesson_path(course, lesson)
+      .card-copy
+        %p
+          = lesson.description
+      .card-stats
+        %ul
+          %li
+            - cache @completion do
+              - if user_completion(lesson)
+                Yes
+              - else
+                No
+            %span Completed?
+          %li
+            = lesson.duration
+            %span Minutes
+          %li
+            Easy
+            %span Difficulty
+- elsif lesson.free?
+  - cache lesson do
+    .card
+      .ribbon-wrapper
+        .ribbon FREE
+      .card-image
+        %img{:alt => "", :src => lesson.thumbnail_url}
+      .card-header
+        = link_to lesson.name, course_lesson_path(course, lesson)
+      .card-copy
+        %p
+          = lesson.description
+      .card-stats
+        %ul
+          %li
+            - if user_completion(lesson)
+              Yes
+            - else
+              No
+            %span Completed?
+          %li
+            = lesson.duration
+            %span Minutes
+          %li
+            Easy
+            %span Difficulty
+- else
+  - cache lesson do
+    .card
+      .card-image
+        %img{:alt => "", :src => lesson.thumbnail_url}
+      .card-header
+        = lesson.name
+      .card-copy
+        %p
+          #{link_to 'Upgrade your account', '#'} to get access to this and all
+          of the other lessons in this course!
+      .card-stats
+        %ul
+          %li
+            - if user_completion(lesson)
+              Yes
+            - else
+              No
+            %span Completed?
+          %li
+            = lesson.duration
+            %span Minutes
+          %li
+            Easy
+            %span Difficulty

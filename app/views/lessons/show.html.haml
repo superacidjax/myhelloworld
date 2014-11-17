@@ -1,0 +1,43 @@
+- content_for :head do
+  = stylesheet_link_tag 'pygments'
+.lesson-header
+  .titles
+    %h1
+      = lesson.name
+    %p
+      = course.name
+  .completion-section.data-no-turbolink
+    - if completion && completion.completed?
+      #lesson-incomplete
+        = link_to 'Mark this lesson completed', lesson_completed_path(lesson_id: lesson.id), remote: true
+      #lesson-complete
+        = link_to 'Mark this lesson incomplete', lesson_completed_path(lesson_id: lesson.id), remote: true
+    - else
+      #lesson-complete
+        = link_to 'Mark this lesson completed', lesson_completed_path(lesson_id: lesson.id), remote: true
+      #lesson-incomplete
+        = link_to 'Mark this lesson incomplete', lesson_completed_path(lesson_id: lesson.id), remote: true
+.clear
+.intro-wrapper#intro
+  %section.intro-content
+    .well
+      %p
+        = lesson.description
+      .right
+        = link_to "Awesome! Let's start the lesson!", '#', id: 'start-lesson', class: 'data-no-turbolink'
+
+#lesson-content
+  %section
+    .video-wrapper
+      %iframe{:allowfullscreen => "", :frameborder => "0", :height => "506", :mozallowfullscreen => "", :src => "//player.vimeo.com/video/#{lesson.video_url}", :webkitallowfullscreen => "", :width => "900"}
+#lesson-notes-and-discussion
+  %ul.accordion-tabs
+    %li.tab-header-and-content
+      %a.is-active.tab-link{:href => "#"} Lesson Notes
+      .tab-content
+        = markdown lesson.notes
+    %li.tab-header-and-content
+      %a.tab-link{:href => "#"} Discussion
+      .tab-content
+        %p
+          = commontator_thread(lesson)

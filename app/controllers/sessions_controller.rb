@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to(:users, notice: 'Signed out!')
+    redirect_to(root_path, notice: 'Signed out!')
   end
 end

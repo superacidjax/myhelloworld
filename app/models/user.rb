@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
+  has_paper_trail
+  acts_as_commontator
+
+  has_many :sales
+  has_many :completions
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },

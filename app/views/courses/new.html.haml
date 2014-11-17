@@ -1,0 +1,14 @@
+%h1
+  Add a new course
+
+= form_for course do |f|
+  = f.text_field :name, placeholder: 'Name'
+  = f.text_field :video_url, placeholder: 'Vimeo ID'
+  = f.text_field :headline, placeholder: 'Headline'
+  = f.text_area :description, placeholder: 'Description'
+  = f.text_field :price, placeholder: 'Price'
+  = f.text_field :slug, placeholder: 'Permalink'
+  = f.select(:programming_language, options_for_select([["Swift", "Swift"], ["Ruby", "Ruby"]]))
+  = f.select(:device, options_for_select([["iOS", "iOS"], ["Web", "Web"]]))
+  = f.select(:level, options_for_select([["Beginner", "Beginner"], ["Intermediate", "Intermediate"], ["Advanced", "Advanced"]]))
+  = f.submit

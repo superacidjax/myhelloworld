@@ -1,0 +1,28 @@
+= form_for lesson, url: course_lesson_path, method: :put do |f|
+  = f.text_field :name, placeholder: 'Name'
+  = f.text_area :description, placeholder: 'Description'
+  .countdown.right
+    350
+  %br
+  = f.text_area :notes, placeholder: 'Notes'
+  %br
+  = f.text_field :video_url, placeholder: 'Vimeo Video ID'
+  = f.label :free, 'Free?'
+  = f.check_box :free
+  = f.label :duration, 'Minutes'
+  = f.select(:duration, options_for_select(1..60))
+  = f.url_field :thumbnail_url, placeholder: 'Vimeo Thumbnail URL'
+  = f.submit
+
+:javascript
+  function updateCountdown() {
+    // 350 is the max message length
+    var remaining = 350 - jQuery('#lesson_description').val().length;
+    jQuery('.countdown').text(remaining + ' characters remaining.');
+  }
+
+  jQuery(document).ready(function($) {
+    updateCountdown();
+    $('#lesson_description').change(updateCountdown);
+    $('#lesson_description').keyup(updateCountdown);
+  });

@@ -1,6 +1,45 @@
-%h1
-  = course.name
-%p
-  = number_to_currency(course.price)
+.intro-text
+  %h3
+    = course.level
+  %h3
+    = course.device
+  %h3
+    = course.programming_language
+  %h2
+    = course.name
+  %h4
+    = course.headline
+  %p
+    = course.description
+  %p.lesson-header
+    = button_to 'Get Started Now', sign_up_path(course: course.id), id: 'sign-up'
 
-= link_to 'Get Started Now', sign_up_path
+%h2.center
+  Features of all Everybody Code! Courses
+%ul.bullets.bigtop-pad
+  %li.bullet.three-col-bullet
+    .bullet-icon
+      %i.fa.fa-film.fa-3x
+    .bullet-content
+      %h2 Awesome Video Lessons
+      %p
+        Everybody Code! video lessons are short, easy to follow and make it easy
+        to follow what the instructor is teaching. They're high-qualty, HD videos
+        that you can watch from any device.
+  %li.bullet.three-col-bullet
+    .bullet-icon
+      %i.fa.fa-smile-o.fa-3x
+    .bullet-content
+      %h2 Beginner Focused
+      %p
+        Unlike other programming courses, Everybody Code! is designed for people
+        who have never programmed before. Our lessons walk you through everything
+        you need to know, step by step.
+  %li.bullet.three-col-bullet
+    .bullet-icon
+      %i.fa.fa-group.fa-3x
+    .bullet-content
+      %h2 Community
+      %p
+        Each lesson has a discussion area where you can ask the instructor questions
+        as well as interact with other students. You are not alone!

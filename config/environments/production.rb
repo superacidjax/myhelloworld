@@ -20,6 +20,11 @@ Rails.application.configure do
   # NGINX, varnish or squid.
   # config.action_dispatch.rack_cache = true
 
+  config.action_dispatch.rack_cache = {
+    metastore:   "#{ENV['REDISCLOUD_URL']}/0/metastore",
+    entitystore: "#{ENV['REDISCLOUD_URL']}/0/entitystore"
+  }
+
   # Disable Rails's static asset server (Apache or NGINX will already do this).
   config.serve_static_assets = false
 
@@ -34,6 +39,7 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
+  config.action_mailer.default_url_options = { host: 'courses.everybodycode.com' }
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.

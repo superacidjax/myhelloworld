@@ -23,6 +23,9 @@ module Myhelloworld
       g.helper_specs    false
       g.fixture_replacement :fabrication
     end
+
+    config.cache_store = :redis_store, "#{ENV['REDISCLOUD_URL']}/cache"
+
     config.sass.preferred_syntax = :scss
     config.active_record.raise_in_transactional_callbacks = true
   end

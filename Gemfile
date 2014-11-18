@@ -9,7 +9,6 @@ gem 'sidekiq'
 gem 'redis-rails'
 gem 'sinatra', '>= 1.3.0', require: nil
 gem 'redis-rack-cache'
-gem 'payola-payments'
 
 gem 'redcarpet'
 gem 'pygments.rb'

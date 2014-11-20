@@ -3,6 +3,7 @@ class Course < ActiveRecord::Base
 
   has_many :sales
   has_many :lessons
+  has_many :completions
 
   extend FriendlyId
   friendly_id :name, use: :slugged

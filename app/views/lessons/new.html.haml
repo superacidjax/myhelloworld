@@ -17,6 +17,8 @@
   = f.label :duration, 'Minutes'
   = f.select(:duration, options_for_select(1..60))
   = f.url_field :thumbnail_url, placeholder: 'Vimeo Thumbnail URL'
+  = f.label :lesson_number
+  = f.number_field :lesson_number
   = f.submit
 
 :javascript

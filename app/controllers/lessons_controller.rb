@@ -2,14 +2,12 @@ class LessonsController < ApplicationController
 
   expose(:lesson, attributes: :lesson_params)
   expose(:course) { Course.friendly.find(params[:course_id]) }
-  expose(:completion)
   expose(:completions) { current_user.completions}
+  expose(:user)
 
   layout "lesson"
 
   def show
-    self.completion = Completion.where(user_id: current_user.id,
-      lesson_id: lesson.id).last
     self.course = Course.friendly.find(params[:course_id])
     commontator_thread_show(lesson)
   end
@@ -38,12 +36,11 @@ class LessonsController < ApplicationController
   end
 
   def user_completed
-    self.course = Course.where(lesson: lesson)
-    if user_completion = Completion.find_by_user_id(current_user.id)
-      user_completion.toggle!(:completed)
+    if user_completion = Completion.where(user_id: current_user.id,
+      lesson_id: params[:lesson_id]).last
+      user_completion.destroy
     else
-      user_completion = Completion.create(user_id: current_user.id,
-        lesson_id: params[:lesson_id], completed: true)
+      Completion.create!(user_id: current_user.id, lesson_id: params[:lesson_id], completed: true, course_id: params[:course_id])
     end
   end
 
@@ -51,7 +48,7 @@ class LessonsController < ApplicationController
 
   def lesson_params
     params.require(:lesson).permit(:name, :description, :notes, :video_url,
-      :free, :duration)
+      :free, :duration, :lesson_number)
   end
 
 end

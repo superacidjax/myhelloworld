@@ -1,9 +1,8 @@
-.lesson-header
+.intro-text
   %h1
     Our Courses
-  - if current_user.admin?
+  - if admin?
     = link_to 'Add Course', new_course_path
-.lesson-listing
-  .cards
-    - cache courses do
-      = render courses
+.cards
+  - cache courses do
+    = render courses

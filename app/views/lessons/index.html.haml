@@ -1,10 +1,7 @@
-.lesson-header
+.intro-text
   %h1 Lessons
-
-  - if current_user.admin?
+  - if admin?
     = link_to 'Add Lesson', new_course_lesson_path(course)
-
-.lesson-listing
-  .cards
-    - cache course.lessons do
-      = render course.lessons.order(:name)
+.cards
+  - cache course.lessons do
+    = render course.lessons.order(:name)

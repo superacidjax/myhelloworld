@@ -1,6 +1,7 @@
 // Typography
-$sans-serif: 'Lato';
-$serif: 'Merriweather';
+$serif: 'Lusitana', serif;
+$serif-2: 'Merriweather', serif;
+$sans-serif: 'Merriweather Sans', sans-serif;
 $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
 
@@ -23,7 +24,7 @@ $base-spacing: $base-line-height * 1em;
 $base-z-index: 0;
 
 // Colors
-$blue: #477DCA;
+$blue: #0A00AB;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;

@@ -9,6 +9,8 @@
       .card-copy
         %p
           = lesson.description
+        %p.right
+          = link_to 'Start Lesson', course, class: 'btn'
       .card-stats
         %ul
           %li
@@ -36,6 +38,8 @@
       .card-copy
         %p
           = lesson.description
+        %p.right
+          = link_to 'Start Lesson', course, class: 'btn'
       .card-stats
         %ul
           %li
@@ -58,9 +62,8 @@
       .card-header
         = lesson.name
       .card-copy
-        %p
-          #{link_to 'Upgrade your account', '#'} to get access to this and all
-          of the other lessons in this course!
+        %p.center
+          = link_to 'Get Access To This Lesson', '#', class: 'btn yellow-btn'
       .card-stats
         %ul
           %li

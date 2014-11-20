@@ -1,42 +1,33 @@
-/ - if logged_in?
-/   Welcome #{current_user.display_name}
-/   Happy #{Date.today.strftime("%A")}!
-/   = link_to 'Sign out', sign_out_path, method: :delete
-/ - else
-/   = link_to t('.sign_in'), sign_in_path
-
-/ = link_to 'Home', root_path
-/ = link_to 'Courses', courses_path
-/ - if current_user
-/   - if course.id
-/     = link_to "#{course.name} Lessons", course_lessons_path(course)
-
 %header.centered-navigation
   .centered-navigation-wrapper
     %a.mobile-logo{:href => root_path}
       %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
     %a.centered-navigation-menu-button{:href => ""} MENU
     %ul.centered-navigation-menu
-      %li.nav-link
-        = link_to 'Courses', courses_path
-      %li.nav-link
-        %a{:href => "javascript:void(0)"} About Us
-      %li.nav-link
-        %a{:href => "javascript:void(0)"} Help
       %li.nav-link.logo
         %a.logo{:href => root_path}
           %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
       %li.nav-link
-        = link_to 'Blog', 'http://everybodycode.com'
-      %li.nav-link.more
-        %a{:href => "javascript:void(0)"} Me
-        %ul.submenu
-          %li
-            %a{:href => "javascript:void(0)"} Edit Profile
-          %li
-            %a{:href => "javascript:void(0)"} Billing
+        = link_to 'Courses', courses_path
       %li.nav-link
-        - if logged_in?
-          = link_to 'Sign out', sign_out_path, method: :delete
-        - else
+        = link_to 'About', page_path('about')
+      %li.nav-link
+        %a{:href => "javascript:void(0)"} Help
+      %li.nav-link
+        = link_to 'Blog', 'http://everybodycode.com'
+      - if logged_in?
+        %li.nav-link.more
+          %a{:href => "javascript:void(0)"} Me
+          %ul.submenu
+            %li
+              %a{:href => "javascript:void(0)"} Edit Profile
+            %li
+              %a{:href => "javascript:void(0)"} Billing
+        %li.nav-link
+          - if logged_in?
+            = link_to 'Sign out', sign_out_path, method: :delete
+      - else
+        %li.nav-link
           = link_to t('.sign_in'), sign_in_path
+  %p.right
+    Happy #{Date.today.strftime("%A")}!

@@ -1,19 +1,33 @@
-= user.errors.full_messages.first if user.errors.any?
-.sign-up
-  = form_for user do |f|
-    .text-field
-      = f.label :display_name
-      = f.text_field :display_name
-    .text-field
-      = f.label :email
-      = f.email_field :email
-    .password-field
-      = f.label :password
-      = f.password_field :password
-    .password-field
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
-    .submit-field
-      = f.submit 'Continue'
-    / .other-links
-    /   = link_to t('.sign_in'), sign_in_path
+.intro-text
+  %h1
+    You are powerful.
+  %h4
+    You can learn how to program.
+  %h2
+    It starts here.
+  #sign-up-form
+    %fieldset
+      = user.errors.full_messages.first if user.errors.any?
+      = form_for user do |f|
+        .text-field
+          = f.label :display_name
+          = f.text_field :display_name
+        .text-field
+          = f.label :email
+          = f.email_field :email
+        .password-field
+          = f.label :password
+          = f.password_field :password
+        .submit-field
+          = f.submit 'Try for Free'
+        / .other-links
+        /   = link_to t('.sign_in'), sign_in_path
+  %i.fa.fa-lock.fa-3x.yellow-brown
+  %h4.center
+    Your information is never shared.
+
+  %p
+    You'll get free access to the first two lessons. If you love the lessons
+    and want to continue, you could then upgrade to get access to the rest of the
+    lessons in the course. Also, you'll gain free email support from your
+    instructor in addition to the Discussion section for each lesson.

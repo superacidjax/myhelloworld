@@ -7,9 +7,11 @@
 @import 'base/tables';
 @import 'home';
 @import 'users';
-@import url(http://fonts.googleapis.com/css?family=Lato:900|Merriweather);
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import 'footer';
+@import 'progress-bar';
+@import 'custom_typography';
 
 body {
   @include outer-container;
@@ -19,15 +21,39 @@ body {
   display: none;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Lato', sans-serif;
+.type {
+  border-bottom: 1px solid;
+  display: inline-block;
+  font-family: $sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 2em;
+  padding: .3em 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.yellow-brown {
+  color: #c5b45a;
+}
+
+.yellow-btn {
+  background-color: #c5b45a;
+}
+
+.btn {
+    @extend button;
+    font-family: 'Lato', sans-serif;
+  }
+
+#sign-up-form {
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p {
   font-family: 'Merriweather', serif;
-}
-
-section {
 }
 
 .bigtop-pad {
@@ -38,16 +64,19 @@ section {
   padding-top: 36px;
 }
 
-.lesson-listing {
-  padding-top: 36px;
-}
-
 .titles {
   @include span-columns(8);
 }
 
+.make-space-left {
+  @include span-columns(7);
+}
+
 .completion-section {
-  @include span-columns(3);
+  @include span-columns(4);
+  border: 1px solid black;
+  padding: 36px;
+  margin-right: 0;
 
 }
 
@@ -67,6 +96,10 @@ section {
 
 .right {
   text-align: right;
+}
+
+.left {
+  text-align: left;
 }
 
 .intro-wrapper {
@@ -104,7 +137,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  box-shadow: 10px 10px 25px #888888
+  #box-shadow: 10px 10px 25px #888888
 }
 
 .well {
@@ -323,7 +356,7 @@ section {
 
   .card-image {
     overflow: hidden;
-    max-height: 150px;
+    max-height: 350px;
 
     img {
       width: 100%;
@@ -371,8 +404,8 @@ section {
   .card-copy {
     padding: $base-spacing/2 $gutter/2;
     font-size: .9em;
-    line-height: 1.5em;
-    height: 200px;
+    line-height: 200%;
+    height: 300px;
   }
 
   .card-stats {
@@ -692,6 +725,17 @@ section {
   margin-top: 4em;
   text-align: center;
 
+  h1 {
+    font-family: $serif;
+    font-weight: 800;
+    margin-bottom: .3em;
+
+    @include media($large-screen) {
+      font-size: 5em;
+      margin-bottom: .4em;
+    }
+  }
+
   h2 {
     font-family: $serif;
     font-weight: 800;
@@ -735,6 +779,8 @@ section {
 
   p {
     margin: auto;
+    line-height: 200%;
+    text-align: justify;
 
     @include media($large-screen) {
       width: $intro-text-width;
@@ -804,6 +850,7 @@ section {
   .bullet-content {
     margin-left: $icon-bullet-size *1.4;
     margin-bottom: 2em;
+    text-align: justify;
   }
 
   h2 {
@@ -815,3 +862,150 @@ section {
   }
 }
 
+//Modal
+
+.modal {
+  $modal-padding: 3em;
+  $modal-background: $base-background-color;
+  $modal-close-color: $light-gray;
+  $modal-image-height: 135px;
+  $modal-image-width: $modal-image-height;
+
+  label {
+    cursor: pointer;
+    margin-bottom: 0;
+  }
+
+  label img {
+    $img-width: 300px;
+    border-radius: $img-width/2;
+    display: block;
+    max-width: $img-width;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .btn {
+    @extend button;
+  }
+
+  .modal-open {
+    overflow: hidden;
+  }
+
+  .modal-window { // overlay
+    @include transition(opacity .25s ease);
+    @include position(fixed, 0px 0px 0px 0px);
+    background: rgba(0,0,0, .85);
+    opacity: 0;
+    text-align: left;
+    visibility: hidden;
+    z-index: 99999999999;
+
+    .modal-bg {
+      @include position(absolute, 0px 0px 0px 0px);
+      cursor: pointer;
+    }
+  }
+
+  .modal-close {
+    @include position(absolute, ($modal-padding /2) ($modal-padding /2) null null);
+    @include size(1.5em);
+    cursor: pointer;
+    background: $modal-background;
+
+    &:after,
+    &:before {
+      @include position(absolute, 3px 3px 0 50%);
+      @include transform(rotate(45deg));
+      @include size(.15em 1.5em);
+      background: $modal-close-color;
+      content: '';
+      display: block;
+      margin: -3px 0 0 -1px;
+    }
+
+    &:hover:after,
+    &:hover:before {
+      background: darken($modal-close-color, 10);
+    }
+
+    &:before {
+      @include transform(rotate(-45deg));
+    }
+  }
+
+  .modal-inner {
+    @include transition(opacity .25s ease);
+    border-radius: $base-border-radius;
+    background: $modal-background;
+    margin: auto;
+    max-height: 95%;
+    position: relative;
+    overflow: auto;
+    width: 95%;
+    padding: $modal-padding /2;
+    margin-top: .6em;
+
+    @include media($medium-screen) {
+      padding: $modal-padding;
+      width: 60%;
+      max-height: 60%;
+      margin-top: 10em;
+    }
+
+    @include media($large-screen) {
+      width: 50%;
+      margin-top: 10em;
+    }
+
+    h1 {
+      color: $base-font-color;
+      margin-bottom: .6em;
+      text-align: left;
+      text-transform: capitalize;
+    }
+
+    p.body, p.intro {
+      font-size: $base-font-size;
+      max-width: 100% !important;
+      text-align: left;
+
+      &.intro {
+        color: $blue;
+        line-height: 1.6em;
+      }
+
+      &.body {
+        color: $base-font-color;
+        line-height: 1.45em;
+
+        @include media($medium-screen) {
+          @include columns(2 8em);
+        }
+      }
+    }
+
+    a.cta {
+      color: white;
+      display: inline-block;
+      margin-right: .5em;
+      margin-top: 1em;
+
+      &:last-child {
+        padding: 0 2em;
+      }
+    }
+  }
+
+  .modal-state:checked + .modal-window {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-state:checked + .modal-window .modal-inner {
+    top: 0;
+  }
+}

@@ -1,4 +1,21 @@
-%h1
-  Everybody Code!
-
-= link_to 'See our courses', :courses
+.intro-text
+  %h1
+    Everybody Code!
+  %br
+  %h2
+    Programming for
+    %strong
+      TOTAL
+    beginners.
+  %h4
+    We'll teach you how to build iOS and web apps.
+  %p
+    Everybody Code! is all about helping the total beginner learn the skills
+    they need to start building cool iOS and web applications. Most programming
+    courses are discouraging -- after a few lessons you feel lost and eventually
+    give up. Everybody Code! is the easiest way to learn how to program. Simply
+    follow along with our video lessons, join the discussion and practice. You
+    can do this! We know you can.
+  .lesson-header.center
+    = link_to 'See our courses', :courses, class: 'btn'
+= render 'shared/features'

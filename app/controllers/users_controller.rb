@@ -3,13 +3,12 @@ class UsersController < ApplicationController
   expose(:user, attributes: :user_params)
   expose(:course) { Course.find(session[:course]) }
 
-  respond_to :json
-
   def new
     session[:course] = params[:course]
   end
 
   def create
+    user.password_confirmation = user.password
     if user.save
       auto_login(user)
       lesson = course.lessons.first

@@ -20,8 +20,8 @@
           = f.password_field :password
         .submit-field
           = f.submit 'Try for Free'
-        / .other-links
-        /   = link_to t('.sign_in'), sign_in_path
+        .already-have-an-account
+          Have an account? #{link_to t('.sign_in'), sign_in_path}
   %i.fa.fa-lock.fa-3x.yellow-brown
   %h4.center
     Your information is never shared.

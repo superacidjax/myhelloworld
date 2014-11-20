@@ -20,7 +20,7 @@
           %a{:href => "javascript:void(0)"} Me
           %ul.submenu
             %li
-              %a{:href => "javascript:void(0)"} Edit Profile
+              = link_to 'Edit My Info', edit_user_path(current_user)
             %li
               %a{:href => "javascript:void(0)"} Billing
         %li.nav-link

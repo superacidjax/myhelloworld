@@ -1,0 +1,20 @@
+.intro-text
+  %h1
+    Change is good.
+  %h4
+    Update your email, display name or password.
+  #sign-up-form
+    %fieldset
+      = user.errors.full_messages.first if user.errors.any?
+      = form_for user do |f|
+        .text-field
+          = f.label :display_name
+          = f.text_field :display_name
+        .text-field
+          = f.label :email
+          = f.email_field :email
+        .password-field
+          = f.label :password
+          = f.password_field :password
+        .submit-field
+          = f.submit 'Save'

@@ -7,6 +7,17 @@ class UsersController < ApplicationController
     session[:course] = params[:course]
   end
 
+  def edit
+  end
+
+  def update
+    if user.save
+      flash[:success] = 'You have updated yourself successfully!'
+    else
+      render :edit
+    end
+  end
+
   def create
     user.password_confirmation = user.password
     if user.save

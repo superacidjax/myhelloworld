@@ -5,6 +5,8 @@ class LessonsController < ApplicationController
   expose(:completions) { current_user.completions}
   expose(:user)
 
+  before_action :require_login, except: :index
+
   layout "lesson"
 
   def show

@@ -1,13 +1,9 @@
 module LessonsHelper
 
   def user_has_access?
-    if current_user
-      if sales = current_user.sales.where(course_id: course.id)
-        if sales.present?
-          sales.last.access_expiration_date > Date.today
-        end
-      end
-    end
+    Charge.where(
+      "access_expiration_date > ? AND user_id = ? AND course_id = ?", Date.today.to_s,
+      current_user.id, course.id).present?
   end
 
   def user_completion(lesson)

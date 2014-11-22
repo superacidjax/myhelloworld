@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   mount Commontator::Engine => '/commontator'
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :charges
   resources :courses do

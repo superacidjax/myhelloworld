@@ -1,0 +1,12 @@
+%tr
+  %td
+    = link_to user.display_name, user
+  %td
+    = mail_to user.email
+  %td
+    = user.created_at.strftime('%d %b %Y')
+  %td
+    - if has_active_course?(user.id)
+      Yes!
+    - else
+      No

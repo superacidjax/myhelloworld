@@ -1,3 +1,18 @@
 .intro-text
   %h1
-    You did it!
+    = user.display_name
+
+- if user.charges.present?
+  %table.table-borders
+    %thead
+      %tr
+        %th
+          Course
+        %th
+          Access Expires
+        %th
+          Transaction ID
+        %th
+          Amount Paid
+    %tbody
+      = render partial: 'active_course', collection: user.charges, as: :charge

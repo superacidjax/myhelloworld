@@ -2,6 +2,10 @@ class UsersController < ApplicationController
 
   expose(:user, attributes: :user_params)
   expose(:course) { Course.find(session[:course]) }
+  expose(:users) { User.all.order("created_at DESC")}
+
+  def index
+  end
 
   def new
     session[:course] = params[:course]

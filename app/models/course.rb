@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
   has_paper_trail
 
-  has_many :sales
+  has_many :charges
   has_many :lessons
   has_many :completions
 

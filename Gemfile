@@ -10,6 +10,7 @@ gem 'redis-rails'
 gem 'sinatra', '>= 1.3.0', require: nil
 gem 'redis-rack-cache'
 
+gem 'aasm'
 gem 'redcarpet'
 gem 'pygments.rb'
 

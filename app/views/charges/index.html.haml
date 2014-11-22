@@ -1,0 +1,7 @@
+%ul
+  - charges.each do |charge|
+    %li
+      - if charge.fee_amount
+        = number_to_currency(charge.fee_amount / 100)
+    %li
+      = charge.state

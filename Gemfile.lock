@@ -10,6 +10,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.0.0)
     actionmailer (4.2.0.beta2)
       actionpack (= 4.2.0.beta2)
       actionview (= 4.2.0.beta2)
@@ -328,6 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   acts_as_votable
   bourbon
   byebug

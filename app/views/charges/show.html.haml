@@ -1,0 +1,27 @@
+%table
+  %tr
+    %th Key
+    %th Value
+  - charge.attributes.sort.each do |key, value|
+    %tr
+      %td= key
+      %td= value
+= link_to 'Stripe', "https://manage.stripe.com/payments/#{charge.stripe_id}"
+= link_to 'Back', charges_path
+
+%table
+  %thead
+    %tr
+      %th Timestamp
+      %th Event
+      %th Changes
+  %tbody
+    - charge.versions.each do |version|
+      %tr
+        %td= version.created_at
+        %td= version.event
+        %td
+          - version.changeset.sort.each do |key, value|
+            %b>= key
+            \: #{value[0]} to #{value[1]}
+            %br

@@ -24,6 +24,14 @@
         %li.nav-link
           - if logged_in?
             = link_to 'Sign out', sign_out_path, method: :delete
+        - if admin?
+          %li.nav-link.more
+            %a{href: "javascript:void(0)"} Admin
+            %ul.submenu
+              %li
+                = link_to 'Transactions', charges_path
+              %li
+                = link_to 'Users', users_path
       - else
         %li.nav-link
           = link_to t('.sign_in'), sign_in_path

@@ -12,5 +12,8 @@
   %p
     = course.description
   .lesson-header.center
-    = link_to 'Get Started Now', new_user_path(course: course.id), class: 'btn'
+    - if current_user
+      = link_to 'Get Started Now', course_lessons_path(course), class: 'btn'
+    - else
+      = link_to 'Get Started Now', new_user_path(course: course.id), class: 'btn'
 = render 'shared/features'

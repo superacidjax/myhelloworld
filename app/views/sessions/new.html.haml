@@ -1,8 +1,18 @@
-%h1
-  Sign in
-
-= render 'form'
-
-= link_to 'Cancel', root_path
-
-= link_to 'Sign up', new_user_path
+.intro-text
+  %h1
+    You again!
+  %h2
+    Sign in.
+  #sign-up-form
+    %fieldset
+      = form_tag sessions_path, method: :post do
+        .field
+          = text_field_tag :email, nil, placeholder: 'Email'
+        .field
+          = password_field_tag :password, nil, placeholder: 'Password'
+        .actions
+          = submit_tag 'Sign in'
+    .already-have-an-account
+      = link_to 'Forgot your password?', '#'
+    .already-have-an-account
+      Are you new here? #{link_to t('.sign_up'), sign_up_path}

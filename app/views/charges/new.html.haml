@@ -1,9 +1,32 @@
-%h1
-  = course.name
-
-
-= form_tag charges_path do
-  %article
-    %label.amount
-      %span Amount: $5.00
-  %script.stripe-button{"data-amount" => "500", "data-description" => "A month's subscription", "data-key" => Rails.configuration.stripe[:publishable_key], :src => "https://checkout.stripe.com/checkout.js"}
+.intro-text
+  %h1
+    It's go time!
+  %h4
+    You're seconds away from starting your goal to learn how to program!
+  %h5
+    = course.name
+  %br
+  %h2
+    = number_to_currency(course.price, precision: 0)
+  = form_tag charges_path do
+    %script.stripe-button{"data-amount" => "#{course.price * 100}", "data-image" => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png", "data-allow-remember-me" => "false", "data-label" => "Order Now", "data-email" => "#{current_user.email}", "data-name" => "Everybody Code!", "data-description" => "#{course.name}", "data-key" => Rails.configuration.stripe[:publishable_key], :src => "https://checkout.stripe.com/checkout.js"}
+%p.type
+  Unlimited access to this course for 1 year.
+.checkmark-features
+  %ul.fa-ul
+    %li
+      %i.fa-li.fa.fa-1x.fa-check-square>
+      %p
+        Stream HD lessons on any device
+    %li
+      %i.fa-li.fa.fa-1x.fa-check-square>
+      %p
+        Access to your instructor through email
+    %li
+      %i.fa-li.fa.fa-1x.fa-check-square>
+      %p
+        Participation in lesson discussions
+    %li
+      %i.fa-li.fa.fa-1x.fa-check-square>
+      %p
+        Course e-textbook with notes and examples

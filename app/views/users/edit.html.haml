@@ -5,7 +5,8 @@
     Update your email, display name or password.
   #sign-up-form
     %fieldset
-      = user.errors.full_messages.first if user.errors.any?
+      .yellow-brown.small
+        = user.errors.full_messages.first if user.errors.any?
       = form_for user do |f|
         .text-field
           = f.label :display_name

@@ -11,13 +11,13 @@
       = form_for user do |f|
         .text-field
           = f.label :display_name
-          = f.text_field :display_name
+          = f.text_field :display_name, placeholder: 'Jony Ive'
         .text-field
           = f.label :email
-          = f.email_field :email
+          = f.email_field :email, placeholder: 'jony@beutifuldesign.com'
         .password-field
           = f.label :password
-          = f.password_field :password
+          = f.password_field :password, placeholder: 'Easy to remember, hard to guess'
         .submit-field
           = f.submit 'Try for Free'
         .already-have-an-account

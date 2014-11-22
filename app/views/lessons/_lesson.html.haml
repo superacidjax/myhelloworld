@@ -63,7 +63,7 @@
         = lesson.name
       .card-copy
         %p.center
-          = link_to 'Get Access To This Lesson', '#', class: 'btn yellow-btn'
+          = link_to 'Get Access To This Lesson', new_charge_path(course_id: course.id), class: 'btn yellow-btn'
       .card-stats
         %ul
           %li

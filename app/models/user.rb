@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_paper_trail
   acts_as_commontator
 
-  has_many :sales
+  has_many :charges
   has_many :completions
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

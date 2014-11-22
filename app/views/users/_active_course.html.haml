@@ -1,0 +1,9 @@
+%tr
+  %td
+    = charge.course.name
+  %td
+    = distance_of_time_in_words_to_now(charge.access_expiration_date)
+  %td
+    = link_to 'View Transaction', charge_path(charge.guid)
+  %td
+    = number_to_currency(charge.amount, precision: 0)

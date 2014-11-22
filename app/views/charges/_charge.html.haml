@@ -1,0 +1,17 @@
+%tr
+  %td
+    = link_to charge.user.display_name, user_path(charge.user)
+  %td
+    = charge.created_at.strftime('%d %b %Y')
+  %td
+    = charge.course.name
+  %td
+    = charge.access_expiration_date.strftime('%d %b %Y')
+  %td
+    = link_to charge.guid, charge_path(charge.guid)
+  %td
+    = number_to_currency(charge.amount, precision: 0)
+  %td
+    = number_to_currency(charge.fee_amount, precision: 2)
+  %td
+    = charge.state

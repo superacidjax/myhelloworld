@@ -1,7 +1,25 @@
-%ul
-  - charges.each do |charge|
-    %li
-      - if charge.fee_amount
-        = number_to_currency(charge.fee_amount / 100)
-    %li
-      = charge.state
+.intro-text
+  %h1
+    Transactions
+
+%table.table-borders
+  %thead
+    %tr
+      %th
+        Customer
+      %th
+        Date
+      %th
+        Course
+      %th
+        Access Expires
+      %th
+        Guid
+      %th
+        Amount Charged
+      %th
+        Stripe Fee
+      %th
+        Status
+  %tbody
+    = render charges

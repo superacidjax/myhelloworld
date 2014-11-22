@@ -1,27 +1,33 @@
-%table
-  %tr
-    %th Key
-    %th Value
-  - charge.attributes.sort.each do |key, value|
-    %tr
-      %td= key
-      %td= value
-= link_to 'Stripe', "https://manage.stripe.com/payments/#{charge.stripe_id}"
-= link_to 'Back', charges_path
-
-%table
-  %thead
-    %tr
-      %th Timestamp
-      %th Event
-      %th Changes
-  %tbody
-    - charge.versions.each do |version|
-      %tr
-        %td= version.created_at
-        %td= version.event
-        %td
-          - version.changeset.sort.each do |key, value|
-            %b>= key
-            \: #{value[0]} to #{value[1]}
-            %br
+.intro-text
+  %h1
+    Transaction Details
+- if admin?
+  %h5
+    Status: #{charge.state}
+  %h5
+    User
+  %ul
+    %li
+      = link_to charge.user.display_name, user_path(charge.user)
+    %li
+      = mail_to charge.user.email
+    %li
+      Stripe Customer ID: #{charge.customer_id}
+  %hr
+%h5
+  Purchase
+%ul
+  %li
+    Purchase Date: #{charge.created_at.strftime('%d %b %Y')}
+  %li
+    Purchase Amount: #{number_to_currency(charge.amount, precision: 0)}
+  - if admin?
+    %li
+      Stripe Fee: #{number_to_currency(charge.fee_amount, precision: 2)}
+%h5
+  Course
+%ul
+  %li
+    = charge.course.name
+  %li
+    Access expires on #{charge.access_expiration_date.strftime('%d %b %Y')}

@@ -3,10 +3,14 @@ class ChargesController < ApplicationController
   expose(:user) { current_user }
   expose(:course) { Course.friendly.find(params[:course_id]) }
   expose(:charge, attributes: :charges_params)
-  expose(:charges)
+  expose(:charges) { Charge.all.order("created_at DESC") }
 
   def new
     session[:course_id] = params[:course_id]
+  end
+
+  def show
+    self.charge = Charge.find_by_guid(params[:id])
   end
 
   def create
@@ -22,11 +26,9 @@ class ChargesController < ApplicationController
         user_id: current_user.id,
         customer_id: customer.id,
         course_id: course.id,
-        access_expiration_date: Date.today + 1.year,
         default_card: customer.default_card
         )
-        debugger
-        StripeRunnerJob.perform_now(charge.guid)
+        StripeRunnerJob.perform_later charge.guid
         redirect_to user_path(current_user)
       else
         flash.now[:alert] = "We're sorry, it look like we had a connection issue!

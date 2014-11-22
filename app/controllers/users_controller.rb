@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    user.password_confirmation = user.password
     if user.save
       flash[:success] = 'You have updated yourself successfully!'
     else

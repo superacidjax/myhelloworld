@@ -11,8 +11,6 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :password, presence: true, on: :create
   validates_confirmation_of :password, if: :password
-  validates :password, length: { minimum: 6,
-    message: 'Your password must be at least 6 characters', if: :password }
 
 
   before_save :downcase_email

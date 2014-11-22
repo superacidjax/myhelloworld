@@ -50,7 +50,8 @@ class Charge < ActiveRecord::Base
       self.update(
         stripe_id:       stripe_charge.id,
         card_expiration: Date.new(stripe_charge.card.exp_year, stripe_charge.card.exp_month, 1),
-        fee_amount:      balance.fee
+        fee_amount:      (balance.fee / 100),
+        access_expiration_date: Date.today + 1.year
       )
       self.finish!
     rescue Stripe::StripeError => e

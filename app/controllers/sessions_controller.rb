@@ -6,15 +6,17 @@ class SessionsController < ApplicationController
 
   def create
     if @user = login(params[:email], params[:password])
-      redirect_back_or_to(root_path, notice: 'Sign in successful')
+      flash[:success] = 'Sign in successful'
+      redirect_back_or_to(root_path)
     else
-      flash.now[:alert] = 'Sign in failed'
+      flash.now[:alert] = 'It appears that your sign in was incorrect. Please try again!'
       render action: 'new'
     end
   end
 
   def destroy
     logout
-    redirect_to(root_path, notice: 'Signed out!')
+    flash[:success] = 'Signed out! See you next time!'
+    redirect_to(root_path)
   end
 end

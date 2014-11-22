@@ -12,7 +12,10 @@
       %p
         #{course.description.truncate(310)}
       %p.right
-        = link_to 'Read more', course, class: 'btn'
+        - if current_course_customer?(course)
+          = link_to 'Go to Lessons',  course_lessons_path(course), class: 'btn'
+        - else
+          = link_to 'Read more', course, class: 'btn'
     .card-stats
       %ul
         %li

@@ -26,8 +26,9 @@ html, body {
 
 .footer-2 {
   $footer-background: white;
-  $footer-color: #c5b45a;
-  $footer-link-color: #c5b45a;
+  $footer-color: $base-font-color;
+  /*$footer-color: #c5b45a;*/
+  $footer-link-color: $base-font-color;
   $footer-disclaimer-color: #c5b45a;
 
   background: $footer-background;

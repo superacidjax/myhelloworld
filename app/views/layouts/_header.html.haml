@@ -1,28 +1,26 @@
 %header.centered-navigation
   .centered-navigation-wrapper
-    %a.mobile-logo{:href => root_path}
-      %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
-    %a.centered-navigation-menu-button{:href => ""} MENU
+    %a.mobile-logo{href: root_path}
+      %img{alt: "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
+    %a.centered-navigation-menu-button{href: ""} MENU
     %ul.centered-navigation-menu
       %li.nav-link.logo
-        %a.logo{:href => root_path}
-          %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
+        %a.logo{href: root_path}
+          %img{alt: "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
       %li.nav-link
         = link_to 'Courses', courses_path
       %li.nav-link
         = link_to 'About', page_path('about')
       %li.nav-link
-        %a{:href => "javascript:void(0)"} Help
+        %a{href: "javascript:void(0)"} Help
       %li.nav-link
         = link_to 'Blog', 'http://everybodycode.com'
       - if logged_in?
         %li.nav-link.more
-          %a{:href => "javascript:void(0)"} Me
+          %a{href: "javascript:void(0)"} Me
           %ul.submenu
             %li
               = link_to 'Edit My Info', edit_user_path(current_user)
-            %li
-              %a{:href => "javascript:void(0)"} Billing
         %li.nav-link
           - if logged_in?
             = link_to 'Sign out', sign_out_path, method: :delete

@@ -12,6 +12,7 @@
 @import 'footer';
 @import 'progress-bar';
 @import 'custom_typography';
+@import 'flashes';
 
 body {
   @include outer-container;
@@ -19,6 +20,15 @@ body {
 
 #lesson-incomplete {
   display: none;
+}
+
+.checkmark-features {
+  font-size: 2.4em;
+  line-height: 200%;
+
+  li {
+    line-height: 150%;
+  }
 }
 
 .type {
@@ -31,6 +41,10 @@ body {
   padding: .3em 0;
   text-align: center;
   text-transform: uppercase;
+}
+
+.small {
+  font-size: 1em;
 }
 
 .already-have-an-account {
@@ -1011,5 +1025,35 @@ p {
 
   .modal-state:checked + .modal-window .modal-inner {
     top: 0;
+  }
+}
+
+$flash-red: #FBE3E4;
+$flash-yellow: #FFF6BF;
+$flash-green: #E6EFC2;
+
+%flash-base {
+  display: block;
+  font-weight: bold;
+  margin-bottom: $base-spacing / 2;
+  padding: $base-spacing / 2;
+}
+
+$flashes: (alert: $flash-yellow, error: $flash-red, notice: lighten($base-accent-color, 40), success: $flash-green);
+
+@each $flash, $color in $flashes {
+  .flash-#{$flash} {
+    @extend %flash-base;
+    background: $color;
+    color: darken($color, 60);
+
+    a {
+      color: darken($color, 70);
+      border-bottom: 1px solid transparentize(darken($color, 70), .7);
+
+      &:hover {
+        color: darken($color, 90);
+      }
+    }
   }
 }

@@ -1,18 +1,18 @@
 %header.centered-navigation
   .centered-navigation-wrapper
-    %a.mobile-logo{:href => root_path}
-      %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
-    %a.centered-navigation-menu-button{:href => ""} Lesson Menu
+    %a.mobile-logo{href: root_path}
+      %img{alt: "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
+    %a.centered-navigation-menu-button{href: ""} Lesson Menu
     %ul.centered-navigation-menu
+      %li.nav-link.logo
+        %a.logo{href: root_path}
+          %img{alt: "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
       %li.nav-link
         = link_to 'Lessons', course_lessons_path(course)
       %li.nav-link
-        %a{:href => "javascript:void(0)"} Progress
-      %li.nav-link.logo
-        %a.logo{:href => root_path}
-          %img{:alt => "Logo image", :src => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png"}
+        %a{href: "javascript:void(0)"} Progress
       %li.nav-link
-        %a{:href => "javascript:void(0)"} Help
+        %a{href: "javascript:void(0)"} Help
       %li.nav-link
         - if logged_in?
           = link_to 'Sign out', sign_out_path, method: :delete

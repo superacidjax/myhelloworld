@@ -16,4 +16,8 @@
       = link_to 'Get Started Now', course_lessons_path(course), class: 'btn'
     - else
       = link_to 'Get Started Now', new_user_path(course: course.id), class: 'btn'
-= render 'shared/features'
+%p.type
+  Watch a video to learn more
+%section
+  .video-wrapper
+    %iframe{:allowfullscreen => "", :frameborder => "0", :height => "506", :mozallowfullscreen => "", :src => "//player.vimeo.com/video/#{course.video_url}", :webkitallowfullscreen => "", :width => "900"}

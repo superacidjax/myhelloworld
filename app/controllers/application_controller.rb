@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  def require_admin
+    redirect_to root_path unless current_user && current_user.admin?
+  end
+
   private
 
   def not_authenticated

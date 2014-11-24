@@ -6,6 +6,7 @@ class LessonsController < ApplicationController
   expose(:user)
 
   before_action :require_login, except: :index
+  before_action :require_admin, except: [:show, :index, :user_completed]
 
   layout "lesson"
 

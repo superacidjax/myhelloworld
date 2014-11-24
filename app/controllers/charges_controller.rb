@@ -5,12 +5,18 @@ class ChargesController < ApplicationController
   expose(:charge, attributes: :charges_params)
   expose(:charges) { Charge.all.order("created_at DESC") }
 
+  before_action :require_admin, except: [:new, :show, :create]
+  before_action :require_login
+
   def new
     session[:course_id] = params[:course_id]
   end
 
   def show
     self.charge = Charge.find_by_guid(params[:id])
+    unless current_user.admin?
+      redirect_to root_path unless charge.user == current_user
+    end
   end
 
   def create

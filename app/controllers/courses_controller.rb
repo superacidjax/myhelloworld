@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
   expose(:courses)
   expose(:course, attributes: :course_params)
 
+  before_action :require_admin, except: [:show, :index]
+
   def index
   end
 

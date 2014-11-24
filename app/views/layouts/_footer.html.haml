@@ -7,9 +7,9 @@
   .footer-secondary-links
     %ul
       %li
-        %a{:href => "javascript:void(0)"} Terms and Conditions
+        = link_to 'Terms of Use', page_path('terms')
       %li
-        %a{:href => "javascript:void(0)"} Privacy Policy
+        = link_to 'Privacy', page_path('privacy')
     %ul.footer-social
       %li
         %a{:href => "javascript:void(0)"}

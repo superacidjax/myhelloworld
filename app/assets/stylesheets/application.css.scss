@@ -364,7 +364,7 @@ p {
   border: $card-border;
   margin-bottom: $base-spacing;
   cursor: pointer;
-  box-shadow: 0 2px 4px darken($base-background-color, 10);
+  box-shadow: 0 2px 4px darken($base-background-color, 100);
   position: relative;
 
   @include media($large-screen) {
@@ -424,6 +424,10 @@ p {
     font-size: .9em;
     line-height: 200%;
     height: 300px;
+
+    p {
+        height: 200px;
+    }
   }
 
   .card-stats {
@@ -431,10 +435,11 @@ p {
     overflow: auto;
 
     ul li {
+      text-align: center;
       display: inline;
       color: $card-stats-color;
       font-weight: 800;
-      font-size: 1.2em;
+      font-size: .9em;
       float: left;
       border-right: 1px solid transparentize($base-font-color, .8);
       line-height: 1.1em;
@@ -450,8 +455,9 @@ p {
 
       span {
         color: $base-font-color;
-        font-size: .7em;
+        font-size: 1em;
         display: block;
+        padding-top: .5em;
         font-weight: normal;
       }
     }

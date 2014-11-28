@@ -44,7 +44,7 @@ class Charge < ActiveRecord::Base
   def charge_card
     begin
       stripe_charge = Stripe::Charge.create(
-        amount: self.amount * 100,
+        amount: self.amount,
         currency: "usd",
         customer: self.customer_id,
         description: self.course.name,
@@ -54,7 +54,7 @@ class Charge < ActiveRecord::Base
       self.update(
         stripe_id:       stripe_charge.id,
         card_expiration: Date.new(stripe_charge.card.exp_year, stripe_charge.card.exp_month, 1),
-        fee_amount:      (balance.fee / 100),
+        fee_amount:      (balance.fee),
         access_expiration_date: Date.today + 1.year
       )
       self.finish!

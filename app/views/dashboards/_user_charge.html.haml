@@ -1,0 +1,12 @@
+%tr
+  %td
+    = charge.created_at.strftime('%d %b %Y')
+  %td
+    = charge.course.name
+  %td
+    - if charge.access_expiration_date > Date.today
+      #{distance_of_time_in_words_to_now(charge.access_expiration_date)} from now
+    - else
+      #{distance_of_time_in_words_to_now(charge.access_expiration_date)} ago
+  %td
+    = number_to_currency(charge.amount/100, precision: 0)

@@ -1,0 +1,49 @@
+.intro-text
+  %h1
+    Dashboard
+= link_to 'Edit My Info', edit_user_path(user)
+
+%hr
+- if user.current_courses.present?
+  %h2.center
+    Course Progress
+
+  - user.charges.order("created_at DESC").each do |charge|
+    - if charge.active?
+      %h3
+        = charge.course.name
+      %table.table-borders
+        %thead
+          %tr
+            %th
+              Lesson
+            %th
+              Completed?
+            %th
+              Completed
+        %tbody
+          = render partial: 'dashboards/progress', collection: charge.course.lessons.order("lesson_number ASC"), as: :lesson
+- else
+  %h2
+    You don't have any active courses yet!
+  %p
+    = link_to 'See our courses', :courses, class: 'btn'
+
+%h2
+  Payments
+
+- if user.charges
+
+  %table.table-borders
+    %thead
+      %tr
+        %th
+          Date
+        %th
+          Course
+        %th
+          Access Expires
+        %th
+          Paid
+    %tbody
+      = render partial: 'dashboards/user_charge', collection: user.charges, as: :charge

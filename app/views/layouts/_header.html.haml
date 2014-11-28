@@ -16,11 +16,8 @@
       %li.nav-link
         = link_to 'Blog', 'http://everybodycode.com'
       - if logged_in?
-        %li.nav-link.more
-          %a{href: "javascript:void(0)"} Me
-          %ul.submenu
-            %li
-              = link_to 'Edit My Info', edit_user_path(current_user)
+        %li.nav-link
+          = link_to 'Dashboard', user_dashboard_path
         %li.nav-link
           - if logged_in?
             = link_to 'Sign out', sign_out_path, method: :delete

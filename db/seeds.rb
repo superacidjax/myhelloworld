@@ -567,6 +567,25 @@ user4 = User.create!(display_name: 'Sofi Dear', email: 'sofidear@example.com',
 user5 =User.create!(display_name: 'Brian Dear', email: 'brian@example.com',
   password: 'password', password_confirmation: 'password', admin: false)
 
+DiscountCode.create!(discount_code: '20percent',
+  expiration_date: Date.today + 200.years,
+  description: 'This code provides 20% off!', discount_type: 'percent',
+  discount_amount: 20)
+
+DiscountCode.create!(discount_code: 'expired',
+  expiration_date: Date.today - 1.day,
+  description: 'This code is expired', discount_type: 'percent',
+  discount_amount: 20)
+
+DiscountCode.create!(discount_code: 'cancelled',
+  expiration_date: Date.today + 500.years,
+  description: 'This code is cancelled', discount_type: 'percent',
+  discount_amount: 20, cancelled: true)
+
+DiscountCode.create!(discount_code: '20dollarsoff',
+  expiration_date: Date.today + 200.years,
+  description: 'This code provides $20 off!', discount_type: 'subtraction',
+  discount_amount: 2000)
 
 Charge.create!(state: 'finished', stripe_id: 'ch_152L7wFxloPfUE823hm0uE4H',
   guid: "a620ee11-0991-4677-ba11-235fc2d15fd4", access_expiration_date:

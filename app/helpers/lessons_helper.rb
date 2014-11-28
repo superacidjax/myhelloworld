@@ -22,6 +22,12 @@ module LessonsHelper
     end
   end
 
+  def lesson_progress_finished?(lesson)
+    @completion = Completion.where(user_id: current_user.id,
+      lesson_id: lesson.id, completed: true).last
+    @completion.present?
+  end
+
   def next_lesson
     if next_lesson = Lesson.find_by_lesson_number(lesson.lesson_number + 1)
       @next_lesson = course_lesson_path(course, next_lesson)

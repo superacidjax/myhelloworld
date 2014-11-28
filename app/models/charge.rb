@@ -31,6 +31,10 @@ class Charge < ActiveRecord::Base
     end
   end
 
+  def active?
+    access_expiration_date > Date.today
+  end
+
   private
 
   def populate_guid

@@ -7,6 +7,7 @@ class LessonsController < ApplicationController
 
   before_action :require_login, except: :index
   before_action :require_admin, except: [:show, :index, :user_completed]
+  before_action :require_active_subscription, only: :show
 
   layout "lesson"
 
@@ -43,7 +44,17 @@ class LessonsController < ApplicationController
       lesson_id: params[:lesson_id]).last
       user_completion.destroy
     else
-      Completion.create!(user_id: current_user.id, lesson_id: params[:lesson_id], completed: true, course_id: params[:course_id])
+      Completion.create!(user_id: current_user.id, lesson_id: params[:lesson_id],
+        completed: true, course_id: params[:course_id])
+    end
+  end
+
+  def require_active_subscription
+    unless session[:course_access] = course.id
+      redirect_to new_charge_path(course_id: course.id) unless Charge.where(
+        "access_expiration_date > ? AND user_id = ? AND course_id = ?", Date.today.to_s,
+        current_user.id, course.id).present?
+      session[:course_access] = course.id
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122125041) do
+ActiveRecord::Schema.define(version: 20141128201106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,13 @@ ActiveRecord::Schema.define(version: 20141122125041) do
     t.date     "card_expiration"
     t.string   "customer_id"
     t.string   "default_card"
+    t.integer  "discount_code_id"
+    t.integer  "course_price"
   end
 
   add_index "charges", ["access_expiration_date"], name: "index_charges_on_access_expiration_date", using: :btree
   add_index "charges", ["course_id"], name: "index_charges_on_course_id", using: :btree
+  add_index "charges", ["discount_code_id"], name: "index_charges_on_discount_code_id", using: :btree
   add_index "charges", ["guid"], name: "index_charges_on_guid", using: :btree
   add_index "charges", ["state"], name: "index_charges_on_state", using: :btree
   add_index "charges", ["user_id"], name: "index_charges_on_user_id", using: :btree
@@ -117,6 +120,24 @@ ActiveRecord::Schema.define(version: 20141122125041) do
   add_index "courses", ["programming_language"], name: "index_courses_on_programming_language", using: :btree
   add_index "courses", ["slug"], name: "index_courses_on_slug", unique: true, using: :btree
 
+  create_table "discount_codes", force: true do |t|
+    t.string   "discount_code"
+    t.date     "expiration_date"
+    t.text     "description"
+    t.string   "discount_type"
+    t.integer  "discount_amount"
+    t.string   "referral_email"
+    t.boolean  "cancelled"
+    t.string   "referral_name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "discount_codes", ["cancelled"], name: "index_discount_codes_on_cancelled", using: :btree
+  add_index "discount_codes", ["discount_code"], name: "index_discount_codes_on_discount_code", using: :btree
+  add_index "discount_codes", ["referral_email"], name: "index_discount_codes_on_referral_email", using: :btree
+  add_index "discount_codes", ["referral_name"], name: "index_discount_codes_on_referral_name", using: :btree
+
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -162,22 +183,6 @@ ActiveRecord::Schema.define(version: 20141122125041) do
   add_index "lessons", ["free"], name: "index_lessons_on_free", using: :btree
   add_index "lessons", ["lesson_number"], name: "index_lessons_on_lesson_number", using: :btree
 
-  create_table "sales", force: true do |t|
-    t.integer  "user_id"
-    t.string   "guid"
-    t.string   "stripe_id"
-    t.integer  "course_id"
-    t.datetime "access_expiration_date"
-    t.integer  "price_paid"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "sales", ["access_expiration_date"], name: "index_sales_on_access_expiration_date", using: :btree
-  add_index "sales", ["course_id"], name: "index_sales_on_course_id", using: :btree
-  add_index "sales", ["guid"], name: "index_sales_on_guid", using: :btree
-  add_index "sales", ["user_id"], name: "index_sales_on_user_id", using: :btree
-
   create_table "users", force: true do |t|
     t.string   "email",                           null: false
     t.string   "crypted_password",                null: false
@@ -199,12 +204,13 @@ ActiveRecord::Schema.define(version: 20141122125041) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
   create_table "versions", force: true do |t|
-    t.string   "item_type",  null: false
-    t.integer  "item_id",    null: false
-    t.string   "event",      null: false
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
     t.string   "whodunnit"
     t.text     "object"
     t.datetime "created_at"
+    t.text     "object_changes"
   end
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree

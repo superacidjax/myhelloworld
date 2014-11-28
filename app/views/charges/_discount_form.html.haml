@@ -1,0 +1,9 @@
+#sign-up-form
+  %fieldset
+    = form_tag calculate_discount_price_path do
+      .field
+        = text_field_tag :discount_code
+      .actions
+        = submit_tag 'Apply Code'
+      .actions
+        = link_to 'Nevermind', '#'

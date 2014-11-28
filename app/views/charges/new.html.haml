@@ -6,10 +6,21 @@
   %h5
     = course.name
   %br
+  - if session[:discount_code_id]
+    %h2
+      %del
+        = number_to_currency(course.price/100, precision: 0)
   %h2
-    = number_to_currency(course.price, precision: 0)
+    = number_to_currency(@price/100, precision: 0)
+
   = form_tag charges_path do
-    %script.stripe-button{"data-amount" => "#{course.price * 100}", "data-image" => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png", "data-allow-remember-me" => "false", "data-label" => "Order Now", "data-email" => "#{current_user.email}", "data-name" => "Everybody Code!", "data-description" => "#{course.name}", "data-key" => Rails.configuration.stripe[:publishable_key], :src => "https://checkout.stripe.com/checkout.js"}
+    - if @discount
+      = hidden_field_tag :discount_code_id, session[:discount_code_id]
+    = hidden_field_tag :final_sale_price, @price
+    %script.stripe-button{"data-amount" => "#{@price.to_i}", "data-image" => "https://eace9f72bdbdb48b3a1c-84b89a0ff7c53bcaecc8d06d99783f99.ssl.cf1.rackcdn.com/images/everybody_codes_logo_150px.png", "data-allow-remember-me" => "false", "data-label" => "Order Now", "data-email" => "#{current_user.email}", "data-name" => "Everybody Code!", "data-description" => "#{course.name}", "data-key" => Rails.configuration.stripe[:publishable_key], :src => "https://checkout.stripe.com/checkout.js"}
+  - unless session[:discount_code_id]
+    .lesson-header
+      = link_to 'Use a discount code', apply_discount_code_path, remote: true, id: 'discount-code'
 %p.type
   Unlimited access to this course for 1 year.
 .checkmark-features

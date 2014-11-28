@@ -20,10 +20,15 @@
   %li
     Purchase Date: #{charge.created_at.strftime('%d %b %Y')}
   %li
-    Purchase Amount: #{number_to_currency(charge.amount, precision: 0)}
+    Purchase Amount: #{number_to_currency(charge.amount/100, precision: 0)}
   - if admin?
     %li
-      Stripe Fee: #{number_to_currency(charge.fee_amount, precision: 2)}
+      Stripe Fee: #{number_to_currency(charge.fee_amount/100, precision: 2)}
+    %li
+      Original Course Price: #{number_to_currency(charge.course_price/100, precision: 2)}
+    - if charge.discount_code
+      %li
+        Discount Used: #{charge.discount_code.discount_code}
 %h5
   Course
 %ul

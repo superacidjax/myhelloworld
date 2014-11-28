@@ -4,10 +4,10 @@ class Charge < ActiveRecord::Base
 
   belongs_to :course
   belongs_to :user
+  belongs_to :discount_code
 
   validates :guid, uniqueness: true
-  validates :user_id, :course_id, :amount,
-    :access_expiration_date, presence: true
+  validates :user_id, :course_id, :amount, presence: true
   validates :amount, numericality: { greater_then: 49 }
 
   before_create :populate_guid

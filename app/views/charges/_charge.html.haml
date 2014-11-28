@@ -10,8 +10,10 @@
   %td
     = link_to charge.guid, charge_path(charge.guid)
   %td
-    = number_to_currency(charge.amount, precision: 0)
+    = number_to_currency(charge.amount/100, precision: 0)
   %td
-    = number_to_currency(charge.fee_amount, precision: 2)
+    = number_to_currency(charge.fee_amount/100, precision: 2)
   %td
     = charge.state
+  %td
+    = charge.discount_code.discount_code if charge.discount_code

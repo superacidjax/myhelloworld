@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Commontator::Engine => '/commontator'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :sessions
   resources :users
+
+  get 'my_dashboard' => 'dashboards#my_dashboard', as: :user_dashboard
 
   get 'sign_in' => 'sessions#new', as: :sign_in
   delete 'sign_out' => 'sessions#destroy', as: :sign_out

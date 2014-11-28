@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.1.2'
 
-gem 'rails', '4.2.0.beta2'
+gem 'rails', '4.2.0.rc1'
 gem 'puma'
 gem 'pg'
-gem 'sidekiq'
+gem 'sidekiq', git: 'git://github.com/mperham/sidekiq.git'
 gem 'redis-rails'
 gem 'sinatra', '>= 1.3.0', require: nil
 gem 'redis-rack-cache'

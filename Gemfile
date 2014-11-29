@@ -60,6 +60,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'codeclimate-test-reporter', require: nil
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

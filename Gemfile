@@ -63,6 +63,7 @@ group :test do
   gem 'codeclimate-test-reporter', require: nil
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'dirty'
   gem 'launchy'
   gem 'minitest'
   gem 'selenium-webdriver'

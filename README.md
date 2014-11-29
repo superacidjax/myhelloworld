@@ -1,0 +1,1 @@
+[![Code Climate](https://codeclimate.com/github/superacidjax/myhelloworld/badges/gpa.svg)](https://codeclimate.com/github/superacidjax/myhelloworld)

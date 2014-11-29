@@ -7,6 +7,8 @@ class DiscountCode < ActiveRecord::Base
 
   validates_inclusion_of :discount_type, in: DISCOUNT_TYPE, allow_nil: false,
     allow_blank: false
+  validates :discount_code, :discount_type, :discount_amount, :expiration_date,
+    :description, presence: true
 
   def not_expired_or_cancelled?
     if self.cancelled?

@@ -26,6 +26,13 @@ RSpec.describe Charge, :type => :model do
 
   it { should be_valid }
 
+  specify { expect(@charge.active?).to be_truthy }
+
+  describe 'when a charge is not active' do
+    before { @charge.access_expiration_date = Date.today - 1.day }
+    specify { expect(@charge.active?).to_not be_truthy }
+  end
+  
   describe 'when an amount is not present' do
     before { @charge.amount = nil }
     it { should_not be_valid }

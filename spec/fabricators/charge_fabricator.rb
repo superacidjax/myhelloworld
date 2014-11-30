@@ -1,7 +1,6 @@
 Fabricator(:charge) do
-  state                  "MyString"
+  state                  "pending"
   stripe_id              "MyString"
-  stripe_token           "MyString"
   error                  "MyText"
   fee_amount             1
   amount                 1

@@ -32,6 +32,14 @@ RSpec.describe Charge, :type => :model do
     before { @charge.access_expiration_date = Date.today - 1.day }
     specify { expect(@charge.active?).to_not be_truthy }
   end
+
+  describe 'when a guid is properly created' do
+    before do
+      @charge.guid = nil
+      @charge.save
+    end
+    specify { expect(@charge.guid).to be_truthy }
+  end
   
   describe 'when an amount is not present' do
     before { @charge.amount = nil }

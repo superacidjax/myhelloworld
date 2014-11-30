@@ -1,13 +1,18 @@
 require 'rails_helper'
+require 'stripe_mock'
 
 RSpec.describe Charge, :type => :model do
 
+  let(:stripe_helper) { StripeMock.create_test_helper }
+  before { StripeMock.start }
+  after { StripeMock.stop }
+
   before do
     @charge = Charge.new(state: 'pending', stripe_id: 'zkmxkm_aksjnsakln',
-      fee_amount: 900, amount: 30000, course_id: 1, user_id: 1, guid: '123-123',
-      access_expiration_date: Date.today + 1.year,
-      card_expiration: Date.today + 5.years, default_card: 'somecard',
-      discount_code_id: 2, course_price: 300)
+                         fee_amount: 900, amount: 30000, course_id: 1, user_id: 1, guid: '123-123',
+                         access_expiration_date: Date.today + 1.year,
+                         card_expiration: Date.today + 5.years, default_card: 'somecard',
+                         discount_code_id: 2, course_price: 300)
   end
 
   subject { @charge }
@@ -40,7 +45,7 @@ RSpec.describe Charge, :type => :model do
     end
     specify { expect(@charge.guid).to be_truthy }
   end
-  
+
   describe 'when an amount is not present' do
     before { @charge.amount = nil }
     it { should_not be_valid }
@@ -59,6 +64,15 @@ RSpec.describe Charge, :type => :model do
   describe 'when course_id is not present' do
     before { @charge.course_id = " " }
     it { should_not be_valid }
+  end
+
+  describe 'a successful card charge' do
+    before do
+      course = Fabricate(:course)
+      @charge.course_id = course.id
+      @charge.process!
+    end
+    it { should be_valid }
   end
 
 end

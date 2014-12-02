@@ -54,7 +54,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0.0.beta4'
   gem 'spring'
   gem 'rspec-rails'
-  gem 'fabrication'
+  gem 'fabrication', git: 'git://github.com/superacidjax/fabrication.git'
   gem 'faker'
   gem 'pry-rails'
 end

@@ -1,10 +1,10 @@
 Fabricator(:lesson) do
   course_id   1
-  name        "MyString"
-  description "MyText"
-  video_url   "MyString"
-  notes 'Some note'
-  thumbnail_url 'someurl.example.com'
-  duration 5
-  lesson_number 292
+  name { Faker::Company.catch_phrase }
+  description { Faker::Lorem.paragraph }
+  video_url   12311231234
+  notes { Faker::Lorem.paragraph }
+  thumbnail_url { Faker::Internet.url }
+  duration { Random.new.rand(60) }
+  lesson_number { sequence(:lesson_number) { |i| i } }
 end

@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     if user.save
       auto_login(user)
       flash[:success] = 'Welcome! You are now signed up. '
-      lesson = course.lessons.first
+      lesson = course.lessons.where(lesson_number: 1).last
       redirect_to course_lesson_path(course, lesson)
     else
       render :new

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       auto_login(user)
       flash[:success] = 'Welcome! You are now signed up. '
       lesson = course.lessons.where(lesson_number: 1).last
-      redirect_to course_lesson_path(course, lesson)
+      redirect_to course_lesson_path(course.id, lesson)
     else
       render :new
     end

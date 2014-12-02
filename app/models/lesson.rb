@@ -2,7 +2,7 @@ class Lesson < ActiveRecord::Base
   has_paper_trail
   acts_as_commontable
 
-  belongs_to :course, touch: true
+  belongs_to :course, touch: true, dependent: :destroy
   has_many :completions
 
   validates :name, :description, :video_url, :notes, :thumbnail_url, :duration,

@@ -1,13 +1,38 @@
-# require 'rails_helper'
-# require 'stripe_mock'
+require 'rails_helper'
 
-# feature 'User accessing site', js: true do
-#   # let(:stripe_helper) { StripeMock.create_test_helper }
-#   # before { StripeMock.start }
-#   # after { StripeMock.stop }
+feature 'User signs in, up and out' do
+  let(:course) { Fabricate(:course) }
+  let(:user) { Fabricate(:user) }
+  
+  before do
+    course.save
+  end
 
-#   scenario 'User visits home page' do
-#     visit root_path
-#     expect(page).to have_content 'FEATURES OF EVERYBODY CODE'
-#   end
-# end
+  scenario 'User signs up to try a course' do
+    visit courses_path
+    click_link course.id
+    click_link 'Get Started Now'
+    fill_in 'Display name', with: 'briandear'
+    fill_in 'Email', with: 'brian@example.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Try for Free'
+    expect(page).to have_content 'Welcome! You are now signed up.'
+    expect(page).to have_content course.lessons.where(lesson_number: 1).last.name
+  end
+
+  scenario 'Existing user signs in and signs out' do
+    visit root_path
+    click_link 'Sign In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password'
+    click_button 'Sign in'
+    expect(page).to have_content 'Dashboard'
+    expect(page).to have_content 'Sign in successful'
+    expect(page).to have_content 'Sign out'
+    expect(page).to have_content 'Payments'
+    click_link 'Sign out'
+    expect(page).to have_content 'Signed out! See you next time!'
+    expect(page).to have_content 'Sign In'
+    expect(page).to_not have_content 'Sign out'
+  end
+end

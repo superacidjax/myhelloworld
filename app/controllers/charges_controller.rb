@@ -10,7 +10,6 @@ class ChargesController < ApplicationController
   before_action :require_login
 
   def new
-    # session[:discount_code_id] = nil
     session[:course_id] = params[:course_id]
     if session[:discount_code_id]
       @price = course.calculate_final_discounted_price(session[:discount_code_id])
@@ -43,10 +42,12 @@ class ChargesController < ApplicationController
         course_id: course.id,
         default_card: customer.default_card,
         discount_code_id: params[:discount_code_id],
-        course_price: course.price
+        course_price: course.price,
+        access_expiration_date: Date.today + 1.year
         )
 
         StripeRunnerJob.perform_now charge.guid
+        flash[:success] = 'Thanks for your purchase!'
         redirect_to user_dashboard_path
       else
         flash.now[:alert] = "We're sorry, it look like we had a connection issue!

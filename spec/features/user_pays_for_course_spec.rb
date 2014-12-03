@@ -23,7 +23,7 @@ feature 'User pays for a course', js: true do
       sleep 2
     end
     expect(page).to have_content 'Dashboard'
-    expect(page).to have_content 'Thanks for your purchase!'
+    expect(page).to have_content 'Payments'
   end
   scenario 'Signed in user uses declined card' do
     sign_in(user)
@@ -51,6 +51,6 @@ feature 'User pays for a course', js: true do
     click_button 'Apply Code'
     expect(page).to have_content 'Discount applied!'
     new_price = course.calculate_final_discounted_price(per_discount_code.id)/100
-    expect(page).to have_content "$#{"%g" % new_price}" 
+    expect(page).to have_content "$#{"%g" % new_price}"
   end
 end

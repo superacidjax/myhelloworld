@@ -23,7 +23,7 @@ feature 'User pays for a course', js: true do
       sleep 2
     end
     expect(page).to have_content 'Dashboard'
-    expect(page).to have_content 'Payments'
+    expect(page).to have_content 'Thanks for your purchase!'
   end
   scenario 'Signed in user uses declined card' do
     sign_in(user)

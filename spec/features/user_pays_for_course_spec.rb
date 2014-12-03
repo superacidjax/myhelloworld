@@ -4,6 +4,8 @@ feature 'User pays for a course', js: true do
   let(:course) { Fabricate(:course) }
   let!(:user) { Fabricate(:user) }
   let(:per_discount_code) { Fabricate(:discount_code) }
+  let(:expired_discount_code) { Fabricate(:discount_code,
+    expiration_date: Date.today - 1.day) }
   let(:sub_discount_code) { Fabricate(:discount_code,
                                       discount_type: 'subtraction',
                                       discount_amount: '2000') }
@@ -64,5 +66,25 @@ feature 'User pays for a course', js: true do
     expect(page).to have_content 'Discount applied!'
     new_price = course.calculate_final_discounted_price(sub_discount_code.id)/100
     expect(page).to have_content "$#{"%g" % new_price}"
+  end
+
+  scenario 'Signed in user uses an expired discount code' do
+    sign_in(user)
+    visit course_lessons_path(course)
+    click_link "get_access#{course.lessons.first.id}"
+    click_link 'Use a discount code'
+    fill_in 'discount_code', with: expired_discount_code.discount_code
+    click_button 'Apply Code'
+    expect(page).to have_content 'That discount code has expired!'
+  end
+
+  scenario 'Signed in user uses an unknown discount code' do
+    sign_in(user)
+    visit course_lessons_path(course)
+    click_link "get_access#{course.lessons.first.id}"
+    click_link 'Use a discount code'
+    fill_in 'discount_code', with: 'emptyness'
+    click_button 'Apply Code'
+    expect(page).to have_content 'Sorry, but that code was not found.'
   end
 end

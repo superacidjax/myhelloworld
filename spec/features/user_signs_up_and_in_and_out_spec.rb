@@ -17,7 +17,7 @@ feature 'User signs in, up and out' do
     fill_in 'Password', with: 'password'
     click_button 'Try for Free'
     expect(page).to have_content 'Welcome! You are now signed up.'
-    expect(page).to have_content course.lessons.where(lesson_number: 1).last.name
+    expect(page).to have_content course.lessons.order(lesson_number: :asc).first.name
   end
 
   scenario 'User signs up with a bad email' do

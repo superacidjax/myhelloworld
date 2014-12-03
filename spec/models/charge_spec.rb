@@ -1,11 +1,6 @@
 require 'rails_helper'
-require 'stripe_mock'
 
 RSpec.describe Charge, :type => :model do
-
-  let(:stripe_helper) { StripeMock.create_test_helper }
-  before { StripeMock.start }
-  after { StripeMock.stop }
 
   before do
     @charge = Charge.new(state: 'pending', stripe_id: 'zkmxkm_aksjnsakln',

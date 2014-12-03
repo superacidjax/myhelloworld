@@ -1,6 +1,6 @@
 Fabricator(:discount_code) do
   discount_code       "20percent"
-  expiration_date     "2014-11-28"
+  expiration_date     { Date.today + 1.year } 
   description         'this is a percentage discount'
   discount_type       "percent"
   discount_amount     20

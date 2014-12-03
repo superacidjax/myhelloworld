@@ -66,32 +66,32 @@ class ChargesController < ApplicationController
     render :new
   end
 
-def apply_discount_code
-end
+  def apply_discount_code
+  end
 
-def calculate_discount_price
-  if params[:discount_code].present?
-    self.course = Course.find(session[:course_id])
-    if discount_code = DiscountCode.find_by(discount_code: params[:discount_code])
-      if discount_code.not_expired_or_cancelled?
-        session[:discount_code_id] = discount_code.id
-        flash[:success] = 'Discount applied!'
-        redirect_to new_charge_path(course_id: course.id)
+  def calculate_discount_price
+    if params[:discount_code].present?
+      self.course = Course.find(session[:course_id])
+      if discount_code = DiscountCode.find_by(discount_code: params[:discount_code])
+        if discount_code.not_expired_or_cancelled?
+          session[:discount_code_id] = discount_code.id
+          flash[:success] = 'Discount applied!'
+          redirect_to new_charge_path(course_id: course.id)
+        else
+          flash[:error] = 'That discount code has expired!'
+          redirect_to new_charge_path(course_id: course.id)
+        end
       else
-        flash[:error] = 'That discount code has expired!'
+        flash[:error] = 'Sorry, but that code was not found.'
         redirect_to new_charge_path(course_id: course.id)
       end
-    else
-      flash[:error] = 'Sorry, but that code was not found.'
-      redirect_to new_charge_path(course_id: course.id)
     end
   end
-end
 
-private
+  private
 
-def charges_params
-  params.require(:charge).permit(:course_id, :user_id, :amount, :customer_id,
-                                 :access_expiration_date, :default_card)
-end
+  def charges_params
+    params.require(:charge).permit(:course_id, :user_id, :amount, :customer_id,
+                                   :access_expiration_date, :default_card)
+  end
 end

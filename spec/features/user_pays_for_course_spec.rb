@@ -53,4 +53,16 @@ feature 'User pays for a course', js: true do
     new_price = course.calculate_final_discounted_price(per_discount_code.id)/100
     expect(page).to have_content "$#{"%g" % new_price}"
   end
+
+  scenario 'Signed in user uses a subtraction discount code' do
+    sign_in(user)
+    visit course_lessons_path(course)
+    click_link "get_access#{course.lessons.first.id}"
+    click_link 'Use a discount code'
+    fill_in 'discount_code', with: sub_discount_code.discount_code
+    click_button 'Apply Code'
+    expect(page).to have_content 'Discount applied!'
+    new_price = course.calculate_final_discounted_price(sub_discount_code.id)/100
+    expect(page).to have_content "$#{"%g" % new_price}"
+  end
 end

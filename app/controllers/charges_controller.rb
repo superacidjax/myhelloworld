@@ -70,22 +70,32 @@ class ChargesController < ApplicationController
   end
 
   def calculate_discount_price
-    if params[:discount_code].present?
-      self.course = Course.find(session[:course_id])
-      if discount_code = DiscountCode.find_by(discount_code: params[:discount_code])
-        if discount_code.not_expired_or_cancelled?
-          session[:discount_code_id] = discount_code.id
-          flash[:success] = 'Discount applied!'
-          redirect_to new_charge_path(course_id: course.id)
-        else
-          flash[:error] = 'That discount code has expired!'
-          redirect_to new_charge_path(course_id: course.id)
-        end
+    self.course = Course.find(session[:course_id])
+    if discount_code = DiscountCode.find_by(discount_code: params[:discount_code])
+      if discount_code.not_expired_or_cancelled?
+        apply_discount(discount_code, course)
       else
-        flash[:error] = 'Sorry, but that code was not found.'
-        redirect_to new_charge_path(course_id: course.id)
+        expired_code(course)
       end
+    else
+      code_not_found(course)
     end
+  end
+
+  def apply_discount(discount_code, course)
+    session[:discount_code_id] = discount_code.id
+    flash[:success] = 'Discount applied!'
+    redirect_to new_charge_path(course_id: course.id)
+  end
+
+  def expired_code(course)
+    flash[:error] = 'That discount code has expired!'
+    redirect_to new_charge_path(course_id: course.id)
+  end
+
+  def code_not_found(course)
+    flash[:error] = 'Sorry, but that code was not found.'
+    redirect_to new_charge_path(course_id: course.id)
   end
 
   private

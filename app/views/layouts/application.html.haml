@@ -2,6 +2,7 @@
 %html
   %head
     = render 'layouts/head'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
   %body
     .wrapper-for-content-outside-of-footer
       = render 'layouts/header'
@@ -9,4 +10,3 @@
       .outer-wrapper
         = yield
     = render 'layouts/footer'
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
